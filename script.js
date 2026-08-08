@@ -116,3 +116,68 @@ function renderAppDetail(container) {
     <a class="back-link" href="index.html">&larr; Back to all apps</a>
   `;
 }
+
+/**
+ * Wires up the "delete my data" request form: populates the app
+ * dropdown from APPS, submits via FormSubmit (no backend needed),
+ * and shows an inline confirmation or a mailto fallback on failure.
+ */
+function initDeletionForm(form) {
+  if (!form) return;
+
+  const select = form.querySelector("#app-select");
+  const statusEl = document.getElementById("deletion-status");
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  if (select) {
+    select.innerHTML =
+      '<option value="" disabled selected>Select an app</option>' +
+      APPS.map((a) => `<option value="${escapeHtml(a.name)}">${escapeHtml(a.name)}</option>`).join("") +
+      '<option value="Other">Other / not listed</option>';
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = form.email.value.trim();
+    const appName = form.app.value;
+    if (!email || !appName) return;
+
+    submitBtn.disabled = true;
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = "Sending…";
+
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/myportal17@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: `Data deletion request — ${appName}`,
+          email: email,
+          app: appName,
+          request: "Account/data deletion request submitted via the Android Trail website"
+        })
+      });
+
+      if (!res.ok) throw new Error("Request failed");
+
+      form.style.display = "none";
+      statusEl.innerHTML = `
+        <div class="status-success">
+          <h3>Request received</h3>
+          <p>We've received your data deletion request for <strong>${escapeHtml(appName)}</strong>. Your data will be deleted within 72 hours. We'll reach out at <strong>${escapeHtml(email)}</strong> if we need anything else.</p>
+        </div>`;
+    } catch (err) {
+      const mailBody = encodeURIComponent(`Email: ${email}\nApp: ${appName}\n\nPlease delete my data for the app above.`);
+      statusEl.innerHTML = `
+        <div class="status-error">
+          <p>We couldn't submit your request automatically. Please email us directly at
+            <a href="mailto:myportal17@gmail.com?subject=${encodeURIComponent("Data deletion request — " + appName)}&body=${mailBody}">myportal17@gmail.com</a>
+            with your email and app name, and we'll take it from there.</p>
+        </div>`;
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    }
+  });
+}

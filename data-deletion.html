@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Your Data — Android Trail</title>
+<meta name="description" content="Request deletion of your data from any Android Trail app.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%237c5cff%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22 font-weight=%22bold%22>A</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark">A</span>
+      Android Trail
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Apps</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="data-deletion.html" class="active">Data Deletion</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page">
+    <h1>Delete your data</h1>
+    <p>If you'd like us to delete the data associated with your account or usage of one of our apps, submit a request below. We'll process it and delete your data within <strong>72 hours</strong>.</p>
+
+    <form id="deletion-form" class="form-card">
+      <div class="form-field">
+        <label for="email-input">Your email address</label>
+        <input type="email" id="email-input" name="email" placeholder="you@example.com" required>
+      </div>
+      <div class="form-field">
+        <label for="app-select">App</label>
+        <select id="app-select" name="app" required>
+          <option value="" disabled selected>Loading apps…</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit request</button>
+      <p class="form-note">Use the same email address associated with the app, if any. We only use this to confirm and process your deletion request.</p>
+    </form>
+
+    <div id="deletion-status"></div>
+
+    <h2>What gets deleted</h2>
+    <p>We'll remove any account information, usage data, or identifiers tied to your submitted email address for the selected app, in line with that app's <a href="privacy.html">privacy policy</a>. Some apps (like Mala Counter) don't collect any data in the first place, so there may be nothing to delete — we'll let you know either way if you've asked us to confirm.</p>
+
+    <h2>Questions</h2>
+    <p>You can also reach us directly at <a href="mailto:myportal17@gmail.com">myportal17@gmail.com</a> — see our <a href="contact.html">contact page</a> for more.</p>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Android Trail. All rights reserved.</span>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="data-deletion.html">Data Deletion</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="apps-data.js"></script>
+<script src="script.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  initDeletionForm(document.getElementById('deletion-form'));
+</script>
+</body>
+</html>
