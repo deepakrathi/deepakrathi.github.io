@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy — Android Trail</title>
+<meta name="description" content="Privacy policies for all Android Trail apps.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%237c5cff%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22 font-weight=%22bold%22>A</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark">A</span>
+      Android Trail
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Apps</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html" class="active">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="page">
+    <h1>Privacy</h1>
+    <p>Each app we publish has its own privacy policy describing exactly what data (if any) it collects and how it's used. You can find the policy for each app below, or from that app's page.</p>
+
+    <ul class="policy-list" id="policy-list"></ul>
+
+    <h2>This website</h2>
+    <p>androidtrail's website itself doesn't use cookies, tracking scripts, or analytics beyond what's needed to serve the pages you're viewing. If that changes, this page will be updated to reflect it.</p>
+
+    <h2>Questions</h2>
+    <p>If you have any questions about how a specific app handles your data, reach out via our <a href="contact.html">contact page</a>.</p>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Android Trail. All rights reserved.</span>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="apps-data.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const list = document.getElementById('policy-list');
+  list.innerHTML = APPS.map(app => `
+    <li>
+      <span>${app.name}</span>
+      ${app.privacyPolicyUrl
+        ? `<a class="link" href="${app.privacyPolicyUrl}" target="_blank" rel="noopener">View policy →</a>`
+        : `<span style="color:var(--text-faint)">No policy on file</span>`}
+    </li>
+  `).join('');
+</script>
+</body>
+</html>

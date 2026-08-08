@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Android Trail — Simple, useful Android apps</title>
+<meta name="description" content="Android Trail builds simple, focused Android apps — including Ludo Legends and Mala Counter. Find descriptions, screenshots, and download links for every app.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%237c5cff%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22 font-weight=%22bold%22>A</text></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="mark">A</span>
+      Android Trail
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="active">Apps</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Simple, useful Android apps.</h1>
+    <p>We build small, focused apps that do one thing well — no clutter, no accounts you don't need, no surprises.</p>
+    <div class="badges">
+      <span class="badge" id="app-count-badge">Apps</span>
+      <span class="badge">Built by Android Trail</span>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="section-head">
+    <h2>Our apps</h2>
+    <p id="app-count-label"></p>
+  </div>
+  <div class="app-grid" id="app-grid"></div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span>&copy; <span id="year"></span> Android Trail. All rights reserved.</span>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="apps-data.js"></script>
+<script src="script.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  renderAppGrid(document.getElementById('app-grid'));
+  const count = APPS.length;
+  document.getElementById('app-count-badge').textContent = count + (count === 1 ? ' app' : ' apps') + ' and growing';
+  document.getElementById('app-count-label').textContent = count + (count === 1 ? ' app' : ' apps') + ' published';
+</script>
+</body>
+</html>
